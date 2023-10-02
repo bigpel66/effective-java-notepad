@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.Map;
 import java.util.Objects;
 
-import static io.bigpel66.DynamicTypeParser.toInt;
+import static io.bigpel66.utility.DynamicTypeParser.toInt;
 import static io.bigpel66.config.ConfigKey.*;
 
 public class AbstractConfig implements Config {

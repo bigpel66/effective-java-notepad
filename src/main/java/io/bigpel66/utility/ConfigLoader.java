@@ -1,4 +1,4 @@
-package io.bigpel66;
+package io.bigpel66.utility;
 
 import io.bigpel66.config.AbstractConfig;
 import io.bigpel66.config.Config;

@@ -1,6 +1,7 @@
 package io.bigpel66;
 
 import io.bigpel66.config.Config;
+import io.bigpel66.utility.StateTracker;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

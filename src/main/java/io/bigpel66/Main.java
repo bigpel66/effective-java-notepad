@@ -1,6 +1,6 @@
 package io.bigpel66;
 
-import javax.swing.*;
+import io.bigpel66.utility.ConfigLoader;
 
 public class Main {
 

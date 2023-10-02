@@ -1,4 +1,4 @@
-package io.bigpel66;
+package io.bigpel66.utility;
 
 public final class DynamicTypeParser {
 
