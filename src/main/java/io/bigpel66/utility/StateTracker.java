@@ -42,4 +42,12 @@ public final class StateTracker {
 
     }
 
+    public void setLocation(Point v) {
+        location = v;
+    }
+
+    public void setSize(Dimension v) {
+        size = v;
+    }
+
 }
