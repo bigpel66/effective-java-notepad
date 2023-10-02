@@ -1,9 +1,12 @@
 package io.bigpel66.config;
 
+import io.bigpel66.DynamicTypeParser;
+
 import java.awt.*;
 import java.util.Map;
 import java.util.Objects;
 
+import static io.bigpel66.DynamicTypeParser.*;
 import static io.bigpel66.config.ConfigKey.*;
 
 public class AbstractConfig implements Config {
@@ -18,8 +21,8 @@ public class AbstractConfig implements Config {
     }
 
     protected AbstractConfig(Map<ConfigKey, Object> configMap) {
-        position = new Point((int) configMap.getOrDefault(X_POS, X_POS.getValue()), (int) configMap.getOrDefault(Y_POS, Y_POS.getValue()));
-        size = new Dimension((int) configMap.getOrDefault(WIDTH, WIDTH.getValue()), (int) configMap.getOrDefault(HEIGHT, HEIGHT.getValue()));
+        position = new Point(toInt(configMap.getOrDefault(X_POS, X_POS.getValue())), toInt(configMap.getOrDefault(Y_POS, Y_POS.getValue())));
+        size = new Dimension(toInt(configMap.getOrDefault(WIDTH, WIDTH.getValue())), toInt(configMap.getOrDefault(HEIGHT, HEIGHT.getValue())));
     }
 
     @Override

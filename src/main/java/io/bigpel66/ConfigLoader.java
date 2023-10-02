@@ -5,10 +5,7 @@ import io.bigpel66.config.Config;
 import io.bigpel66.config.ConfigKey;
 import io.bigpel66.config.DefaultConfig;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -30,10 +27,11 @@ public class ConfigLoader {
 
     public static Config load() {
         if (configExists()) {
-            Map<ConfigKey, Object> configMap = parseConfig(configFilePath);
+            Map<ConfigKey, Object> configMap = parseConfig();
             return AbstractConfig.of(configMap);
         }
         createConfig();
+        fillDefaultConfig();
         return DefaultConfig.newInstance();
     }
 
@@ -42,16 +40,28 @@ public class ConfigLoader {
         return configFile.exists();
     }
 
-    private static Map<ConfigKey, Object> parseConfig(Path path) throws IllegalFormatException {
-        Objects.requireNonNull(path);
+    private static Map<ConfigKey, Object> parseConfig() {
         Map<ConfigKey, Object> configMap = new HashMap<>();
-        File configFile = new File(path.toString());
+        File configFile = new File(configFilePath.toString());
         try (BufferedReader br = new BufferedReader(new FileReader(configFile))) {
-            // TODO
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] tokens = line.split(":");
+                if (isConfigFieldInvalid(tokens)) {
+                    continue;
+                }
+                configMap.put(ConfigKey.valueOf(tokens[0].trim()), DynamicTypeParser.parse(tokens[1].trim()));
+            }
         } catch (IOException e) {
             throw new RuntimeException("config file cannot be read");
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("config field cannot be interpreted");
         }
         return configMap;
+    }
+
+    private static boolean isConfigFieldInvalid(String[] tokens) {
+        return tokens == null || tokens.length != 2;
     }
 
     private static void createConfig() {
@@ -66,6 +76,20 @@ public class ConfigLoader {
             }
         } catch (IOException e) {
             throw new RuntimeException("config file cannot be created");
+        }
+    }
+
+    private static void fillDefaultConfig() {
+        StringBuilder sb = new StringBuilder();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(configFilePath.toString()))) {
+            ConfigKey[] values = ConfigKey.values();
+            for (ConfigKey value : values) {
+                sb.append(value.name()).append(" : ").append(value.getValue().toString());
+                sb.append("\n");
+            }
+            bw.write(sb.toString());
+        } catch (IOException e) {
+            throw new RuntimeException("default config field cannot be written");
         }
     }
 
