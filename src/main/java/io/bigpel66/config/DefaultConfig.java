@@ -6,12 +6,14 @@ import static io.bigpel66.config.ConfigKey.*;
 
 public class DefaultConfig implements Config {
 
+    private static final DefaultConfig DEFAULT_CONFIG = new DefaultConfig();
+
     private final Point position;
 
     private final Dimension size;
 
-    public static DefaultConfig newInstance() {
-        return new DefaultConfig();
+    public static DefaultConfig getInstance() {
+        return DEFAULT_CONFIG;
     }
 
     private DefaultConfig() {

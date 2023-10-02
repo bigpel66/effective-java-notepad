@@ -1,6 +1,6 @@
 package io.bigpel66;
 
-public class DynamicTypeParser {
+public final class DynamicTypeParser {
 
     public static Object parse(String input) {
         try {

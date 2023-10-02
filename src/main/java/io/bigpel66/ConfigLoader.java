@@ -9,11 +9,9 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.IllegalFormatException;
 import java.util.Map;
-import java.util.Objects;
 
-public class ConfigLoader {
+public final class ConfigLoader {
 
     private static final String homeDirectoryName = System.getProperty("user.home");
 
@@ -32,7 +30,7 @@ public class ConfigLoader {
         }
         createConfig();
         fillDefaultConfig();
-        return DefaultConfig.newInstance();
+        return DefaultConfig.getInstance();
     }
 
     private static boolean configExists() {

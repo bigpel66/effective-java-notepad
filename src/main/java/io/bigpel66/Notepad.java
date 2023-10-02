@@ -7,14 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.io.IOException;
 
-public class Notepad extends JFrame implements ActionListener {
+public final class Notepad extends JFrame implements ActionListener {
 
     private final Config config;
 
 
-    public static Notepad newInstance(Config givenConfig) throws IOException {
+    public static Notepad newInstance(Config givenConfig) {
         return new Notepad(givenConfig);
     }
 
