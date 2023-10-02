@@ -4,7 +4,7 @@ import java.awt.*;
 
 public interface Config {
 
-    Point getPoint();
+    Point getLocation();
 
     Dimension getSize();
 

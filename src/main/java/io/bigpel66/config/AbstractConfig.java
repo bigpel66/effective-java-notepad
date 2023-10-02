@@ -24,7 +24,7 @@ public class AbstractConfig implements Config {
     }
 
     @Override
-    public Point getPoint() {
+    public Point getLocation() {
         return position;
     }
 

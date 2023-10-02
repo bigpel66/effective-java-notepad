@@ -20,6 +20,8 @@ public class Notepad extends JFrame implements ActionListener {
 
     private Notepad(Config givenConfig) {
         config = givenConfig;
+        setSize(config.getSize());
+        setLocation(config.getLocation());
         setVisible(true);
         this.addComponentListener(new ComponentListener() {
 
