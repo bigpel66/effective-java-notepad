@@ -9,7 +9,7 @@ import static io.bigpel66.config.ConfigKey.*;
 
 public class AbstractConfig implements Config {
 
-    private final Point position;
+    private final Point location;
 
     private final Dimension size;
 
@@ -19,13 +19,13 @@ public class AbstractConfig implements Config {
     }
 
     protected AbstractConfig(Map<ConfigKey, Object> configMap) {
-        position = new Point(toInt(configMap.getOrDefault(X_POS, X_POS.getValue())), toInt(configMap.getOrDefault(Y_POS, Y_POS.getValue())));
+        location = new Point(toInt(configMap.getOrDefault(X_POS, X_POS.getValue())), toInt(configMap.getOrDefault(Y_POS, Y_POS.getValue())));
         size = new Dimension(toInt(configMap.getOrDefault(WIDTH, WIDTH.getValue())), toInt(configMap.getOrDefault(HEIGHT, HEIGHT.getValue())));
     }
 
     @Override
     public Point getLocation() {
-        return position;
+        return location;
     }
 
     @Override

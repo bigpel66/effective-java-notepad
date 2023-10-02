@@ -12,6 +12,7 @@ public final class Notepad extends JFrame implements ActionListener {
 
     private final Config config;
 
+    private final StateTracker tracker;
 
     public static Notepad newInstance(Config givenConfig) {
         return new Notepad(givenConfig);
@@ -19,9 +20,27 @@ public final class Notepad extends JFrame implements ActionListener {
 
     private Notepad(Config givenConfig) {
         config = givenConfig;
+        tracker = StateTracker
+                .builder()
+                .location(config.getLocation())
+                .size(config.getSize())
+                .build();
+        setContext();
+        setVisible(true);
+        setState();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    private void setContext() {
         setSize(config.getSize());
         setLocation(config.getLocation());
-        setVisible(true);
+    }
+
+    private void setState() {
         this.addComponentListener(new ComponentListener() {
 
             @Override
@@ -45,11 +64,6 @@ public final class Notepad extends JFrame implements ActionListener {
             }
 
         });
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
     }
 
 }
