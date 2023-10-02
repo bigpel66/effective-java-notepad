@@ -1,12 +1,10 @@
 package io.bigpel66.config;
 
-import io.bigpel66.DynamicTypeParser;
-
 import java.awt.*;
 import java.util.Map;
 import java.util.Objects;
 
-import static io.bigpel66.DynamicTypeParser.*;
+import static io.bigpel66.DynamicTypeParser.toInt;
 import static io.bigpel66.config.ConfigKey.*;
 
 public class AbstractConfig implements Config {

@@ -14,12 +14,12 @@ public class Notepad extends JFrame implements ActionListener {
     private final Config config;
 
 
-    public static Notepad newInstance() throws IOException {
-        return new Notepad();
+    public static Notepad newInstance(Config givenConfig) throws IOException {
+        return new Notepad(givenConfig);
     }
 
-    private Notepad() throws IOException {
-        config = ConfigLoader.load();
+    private Notepad(Config givenConfig) {
+        config = givenConfig;
         setVisible(true);
         this.addComponentListener(new ComponentListener() {
 
