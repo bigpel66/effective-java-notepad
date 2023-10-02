@@ -8,4 +8,6 @@ public interface Config {
 
     Dimension getSize();
 
+    String getTitle();
+
 }

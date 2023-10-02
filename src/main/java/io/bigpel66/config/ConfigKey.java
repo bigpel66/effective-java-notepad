@@ -9,7 +9,7 @@ public enum ConfigKey {
     Y_POS(0),
     WIDTH(300),
     HEIGHT(300),
-    ;
+    TITLE("New File");
 
     private final Object value;
 

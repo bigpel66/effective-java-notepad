@@ -8,6 +8,8 @@ public final class StateTracker {
 
     private Dimension size;
 
+    private String title;
+
     public static Builder builder() {
         return new Builder();
     }
@@ -15,6 +17,7 @@ public final class StateTracker {
     private StateTracker(Builder builder) {
         location = builder.location;
         size = builder.size;
+        title = builder.title;
     }
 
     public static class Builder {
@@ -22,6 +25,8 @@ public final class StateTracker {
         private Point location;
 
         private Dimension size;
+
+        private String title;
 
         private Builder() {
         }
@@ -33,6 +38,11 @@ public final class StateTracker {
 
         public Builder size(Dimension v) {
             size = v;
+            return this;
+        }
+
+        public Builder title(String v) {
+            title = v;
             return this;
         }
 
@@ -48,6 +58,10 @@ public final class StateTracker {
 
     public void setSize(Dimension v) {
         size = v;
+    }
+
+    public void setTitle(String v) {
+        title = v;
     }
 
 }

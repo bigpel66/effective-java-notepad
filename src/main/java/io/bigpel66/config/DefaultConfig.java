@@ -12,6 +12,8 @@ public class DefaultConfig implements Config {
 
     private final Dimension size;
 
+    private final String title;
+
     public static DefaultConfig getInstance() {
         return DEFAULT_CONFIG;
     }
@@ -19,6 +21,7 @@ public class DefaultConfig implements Config {
     private DefaultConfig() {
         position = new Point(X_POS.getValue(), Y_POS.getValue());
         size = new Dimension(WIDTH.getValue(), HEIGHT.getValue());
+        title = TITLE.getValue();
     }
 
     @Override
@@ -29,6 +32,11 @@ public class DefaultConfig implements Config {
     @Override
     public Dimension getSize() {
         return size;
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
     }
 
 }

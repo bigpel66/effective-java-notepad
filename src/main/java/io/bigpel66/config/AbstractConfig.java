@@ -13,6 +13,8 @@ public class AbstractConfig implements Config {
 
     private final Dimension size;
 
+    private final String title;
+
     public static AbstractConfig of(Map<ConfigKey, Object> configMap) {
         Objects.requireNonNull(configMap);
         return new AbstractConfig(configMap);
@@ -21,6 +23,7 @@ public class AbstractConfig implements Config {
     protected AbstractConfig(Map<ConfigKey, Object> configMap) {
         location = new Point(toInt(configMap.getOrDefault(X_POS, X_POS.getValue())), toInt(configMap.getOrDefault(Y_POS, Y_POS.getValue())));
         size = new Dimension(toInt(configMap.getOrDefault(WIDTH, WIDTH.getValue())), toInt(configMap.getOrDefault(HEIGHT, HEIGHT.getValue())));
+        title = configMap.getOrDefault(TITLE, TITLE.getValue()).toString();
     }
 
     @Override
@@ -31,6 +34,11 @@ public class AbstractConfig implements Config {
     @Override
     public Dimension getSize() {
         return size;
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
     }
 
 }
