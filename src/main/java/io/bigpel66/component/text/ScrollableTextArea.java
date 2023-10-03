@@ -22,6 +22,7 @@ public final class ScrollableTextArea extends JScrollPane {
         Container container = context.getContentPane();
         container.setLayout(new BorderLayout());
         textArea.getDocument().addDocumentListener(new DocumentListener() {
+
             @Override
             public void insertUpdate(DocumentEvent e) {
                 StateTracker stateTracker = context.getStateTracker();
@@ -51,6 +52,7 @@ public final class ScrollableTextArea extends JScrollPane {
                     stateTracker.setContents(textArea.getText());
                 }
             }
+
         });
         this.textArea = textArea;
         container.add(this);
