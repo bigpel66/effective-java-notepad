@@ -1,13 +1,17 @@
 package io.bigpel66;
 
+import io.bigpel66.component.menu.EditMenu;
+import io.bigpel66.component.menu.FileMenu;
+import io.bigpel66.component.menu.FormatMenu;
+import io.bigpel66.component.menu.HelpMenu;
+import io.bigpel66.component.menu.MenuBar;
+import io.bigpel66.component.text.ScrollableTextArea;
 import io.bigpel66.config.Config;
 import io.bigpel66.utility.StateTracker;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
+import java.awt.*;
+import java.awt.event.*;
 
 public final class Notepad extends JFrame implements ActionListener {
 
@@ -41,29 +45,50 @@ public final class Notepad extends JFrame implements ActionListener {
         setSize(config.getSize());
         setLocation(config.getLocation());
         setTitle(config.getTitle());
+        setMenuBarLayout();
+        setTextAreaLayout();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    private void setMenuBarLayout() {
+        add(MenuBar.newInstance());
+    }
+
+    private void setTextAreaLayout() {
+        Container contentPane = getContentPane();
+        contentPane.setLayout(new BorderLayout());
+        contentPane.add(ScrollableTextArea.newInstance());
     }
 
     private void setState() {
-        this.addComponentListener(new ComponentListener() {
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // TODO :: SAVE FILE QUESTION
+                // TODO :: STATE TO CONFIG
+                System.out.println("closing...");
+            }
+        });
+        addComponentListener(new ComponentListener() {
 
             @Override
             public void componentResized(ComponentEvent e) {
+                // TODO :: CHANGE STATE
                 System.out.println(Notepad.this.getSize());
             }
 
             @Override
             public void componentMoved(ComponentEvent e) {
+                // TODO :: CHANGE STATE
                 System.out.println(Notepad.this.getLocationOnScreen());
             }
 
             @Override
             public void componentShown(ComponentEvent e) {
-
             }
 
             @Override
             public void componentHidden(ComponentEvent e) {
-
             }
 
         });
