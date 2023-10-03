@@ -41,6 +41,8 @@ public final class ConfigLoader {
             sb.append(ConfigKey.WIDTH.name()).append(" : ").append(tracker.getSize().getWidth()).append("\n");
             sb.append(ConfigKey.HEIGHT.name()).append(" : ").append(tracker.getSize().getHeight()).append("\n");
             sb.append(ConfigKey.TITLE.name()).append(" : ").append(tracker.getTitle()).append("\n");
+            sb.append(ConfigKey.CONTENTS.name()).append(" : ").append(tracker.getContents()).append("\n");
+            sb.append(ConfigKey.HASH.name()).append(" : ").append(tracker.getHash()).append("\n");
             bw.write(sb.toString());
         } catch (IOException e) {
             throw new RuntimeException("default config field cannot be written");

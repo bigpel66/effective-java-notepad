@@ -10,4 +10,8 @@ public interface Config {
 
     String getTitle();
 
+    String getContents();
+
+    int getHash();
+
 }

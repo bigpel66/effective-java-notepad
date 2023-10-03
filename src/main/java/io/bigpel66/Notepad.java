@@ -27,6 +27,8 @@ public final class Notepad extends JFrame implements ActionListener {
                 .location(this.config.getLocation())
                 .size(this.config.getSize())
                 .title(this.config.getTitle())
+                .contents(this.config.getContents())
+                .hash(this.config.getHash())
                 .build();
         setContext();
         setVisible(true);

@@ -14,6 +14,10 @@ public final class DefaultConfig implements Config {
 
     private final String title;
 
+    private final String contents;
+
+    private final int hash;
+
     public static DefaultConfig getInstance() {
         return DEFAULT_CONFIG;
     }
@@ -22,6 +26,8 @@ public final class DefaultConfig implements Config {
         position = new Point(X_POS.getValue(), Y_POS.getValue());
         size = new Dimension(WIDTH.getValue(), HEIGHT.getValue());
         title = TITLE.getValue();
+        contents = CONTENTS.getValue();
+        hash = HASH.getValue();
     }
 
     @Override
@@ -37,6 +43,16 @@ public final class DefaultConfig implements Config {
     @Override
     public String getTitle() {
         return title;
+    }
+
+    @Override
+    public String getContents() {
+        return contents;
+    }
+
+    @Override
+    public int getHash() {
+        return hash;
     }
 
 }

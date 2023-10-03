@@ -12,6 +12,7 @@ public final class ScrollableTextArea extends JScrollPane {
     }
 
     private ScrollableTextArea(final Container container, final JTextArea textArea) {
+        // TODO :: EVENT LISTENER TO CATCH INPUT AND RECORD CONTENTS AND HASH
         super(textArea);
         this.textArea = textArea;
         container.add(this);

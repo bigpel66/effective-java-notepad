@@ -1,6 +1,7 @@
 package io.bigpel66.config;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public enum ConfigKey {
@@ -9,7 +10,10 @@ public enum ConfigKey {
     Y_POS(0),
     WIDTH(300),
     HEIGHT(300),
-    TITLE("New File");
+    TITLE("New File"),
+    CONTENTS(""),
+    HASH(Objects.hash("")),
+    ;
 
     private final Object value;
 
