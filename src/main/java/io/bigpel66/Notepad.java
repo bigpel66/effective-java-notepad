@@ -7,7 +7,6 @@ import io.bigpel66.utility.ConfigLoader;
 import io.bigpel66.utility.StateTracker;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public final class Notepad extends JFrame implements ActionListener {
@@ -55,9 +54,7 @@ public final class Notepad extends JFrame implements ActionListener {
     }
 
     private void setTextAreaLayout() {
-        Container contentPane = getContentPane();
-        contentPane.setLayout(new BorderLayout());
-        ScrollableTextArea.newInstance(contentPane);
+        ScrollableTextArea.newInstance(this);
     }
 
     private void setState() {
@@ -89,6 +86,10 @@ public final class Notepad extends JFrame implements ActionListener {
             }
 
         });
+    }
+
+    public StateTracker getStateTracker() {
+        return tracker;
     }
 
     public static void main(String[] args) {

@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
 
 public final class ConfigLoader {
 
@@ -34,6 +35,9 @@ public final class ConfigLoader {
     }
 
     public static void save(final StateTracker tracker) {
+        String replaced = tracker.getContents()
+                .replaceAll("\\n", "\\\\n")
+                .replaceAll("\\f", "\\\\f");
         StringBuilder sb = new StringBuilder();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(configFilePath.toString(), false))) {
             sb.append(ConfigKey.X_POS.name()).append(" : ").append(tracker.getLocation().getX()).append("\n");
@@ -41,7 +45,7 @@ public final class ConfigLoader {
             sb.append(ConfigKey.WIDTH.name()).append(" : ").append(tracker.getSize().getWidth()).append("\n");
             sb.append(ConfigKey.HEIGHT.name()).append(" : ").append(tracker.getSize().getHeight()).append("\n");
             sb.append(ConfigKey.TITLE.name()).append(" : ").append(tracker.getTitle()).append("\n");
-            sb.append(ConfigKey.CONTENTS.name()).append(" : ").append(tracker.getContents()).append("\n");
+            sb.append(ConfigKey.CONTENTS.name()).append(" : ").append(replaced).append("\n");
             sb.append(ConfigKey.HASH.name()).append(" : ").append(tracker.getHash()).append("\n");
             bw.write(sb.toString());
         } catch (IOException e) {
@@ -64,7 +68,12 @@ public final class ConfigLoader {
                 if (isConfigFieldInvalid(tokens)) {
                     continue;
                 }
-                configMap.put(ConfigKey.valueOf(tokens[0].trim()), DynamicTypeParser.parse(tokens[1].trim()));
+                tokens[0] = tokens[0].trim();
+                tokens[1] = tokens[1]
+                        .trim()
+                        .replaceAll("\\\\n", "\n")
+                        .replaceAll("\\\\f", "\f");
+                configMap.put(ConfigKey.valueOf(tokens[0]), DynamicTypeParser.parse(tokens[1]));
             }
         } catch (IOException e) {
             throw new RuntimeException("config file cannot be read");
