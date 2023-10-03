@@ -16,8 +16,6 @@ public final class Notepad extends JFrame implements ActionListener {
 
     private final StateTracker tracker;
 
-    private final Timer timer;
-
     public static Notepad newInstance(final Config config) {
         return new Notepad(config);
     }
@@ -33,8 +31,7 @@ public final class Notepad extends JFrame implements ActionListener {
         setContext();
         setVisible(true);
         setState();
-        timer = new Timer(1000, e -> ConfigLoader.save(tracker));
-        timer.start();
+        new Timer(1000, e -> ConfigLoader.save(tracker)).start();
     }
 
     @Override
