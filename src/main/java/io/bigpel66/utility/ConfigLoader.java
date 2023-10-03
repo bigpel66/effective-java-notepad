@@ -34,7 +34,17 @@ public final class ConfigLoader {
     }
 
     public static void save(final StateTracker tracker) {
-
+        StringBuilder sb = new StringBuilder();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(configFilePath.toString(), false))) {
+            sb.append(ConfigKey.X_POS.name()).append(" : ").append(tracker.getLocation().getX()).append("\n");
+            sb.append(ConfigKey.Y_POS.name()).append(" : ").append(tracker.getLocation().getY()).append("\n");
+            sb.append(ConfigKey.WIDTH.name()).append(" : ").append(tracker.getSize().getWidth()).append("\n");
+            sb.append(ConfigKey.HEIGHT.name()).append(" : ").append(tracker.getSize().getHeight()).append("\n");
+            sb.append(ConfigKey.TITLE.name()).append(" : ").append(tracker.getTitle()).append("\n");
+            bw.write(sb.toString());
+        } catch (IOException e) {
+            throw new RuntimeException("default config field cannot be written");
+        }
     }
 
     private static boolean configExists() {
