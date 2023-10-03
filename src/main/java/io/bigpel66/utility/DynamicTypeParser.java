@@ -2,7 +2,7 @@ package io.bigpel66.utility;
 
 public final class DynamicTypeParser {
 
-    public static Object parse(String input) {
+    public static Object parse(final String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e1) {
@@ -18,7 +18,7 @@ public final class DynamicTypeParser {
         }
     }
 
-    public static Integer toInt(Object input) {
+    public static Integer toInt(final Object input) {
         try {
             return (Integer) input;
         } catch (ClassCastException e1) {

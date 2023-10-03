@@ -4,7 +4,7 @@ import java.awt.*;
 
 import static io.bigpel66.config.ConfigKey.*;
 
-public class DefaultConfig implements Config {
+public final class DefaultConfig implements Config {
 
     private static final DefaultConfig DEFAULT_CONFIG = new DefaultConfig();
 

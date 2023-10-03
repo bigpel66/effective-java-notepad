@@ -33,6 +33,10 @@ public final class ConfigLoader {
         return DefaultConfig.getInstance();
     }
 
+    public static void save(final StateTracker tracker) {
+
+    }
+
     private static boolean configExists() {
         File configFile = new File(configFilePath.toString());
         return configFile.exists();
@@ -58,7 +62,7 @@ public final class ConfigLoader {
         return configMap;
     }
 
-    private static boolean isConfigFieldInvalid(String[] tokens) {
+    private static boolean isConfigFieldInvalid(final String[] tokens) {
         return tokens == null || tokens.length != 2;
     }
 

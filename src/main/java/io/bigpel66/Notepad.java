@@ -3,6 +3,7 @@ package io.bigpel66;
 import io.bigpel66.component.menu.MenuBar;
 import io.bigpel66.component.text.ScrollableTextArea;
 import io.bigpel66.config.Config;
+import io.bigpel66.utility.ConfigLoader;
 import io.bigpel66.utility.StateTracker;
 
 import javax.swing.*;
@@ -15,17 +16,17 @@ public final class Notepad extends JFrame implements ActionListener {
 
     private final StateTracker tracker;
 
-    public static Notepad newInstance(Config givenConfig) {
-        return new Notepad(givenConfig);
+    public static Notepad newInstance(final Config config) {
+        return new Notepad(config);
     }
 
-    private Notepad(Config givenConfig) {
-        config = givenConfig;
+    private Notepad(final Config config) {
+        this.config = config;
         tracker = StateTracker
                 .builder()
-                .location(config.getLocation())
-                .size(config.getSize())
-                .title(config.getTitle())
+                .location(this.config.getLocation())
+                .size(this.config.getSize())
+                .title(this.config.getTitle())
                 .build();
         setContext();
         setVisible(true);
@@ -34,7 +35,7 @@ public final class Notepad extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        // TODO :: EVENT AND KEY STROKE
     }
 
     private void setContext() {
@@ -60,23 +61,20 @@ public final class Notepad extends JFrame implements ActionListener {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                // TODO :: SAVE FILE QUESTION
-                // TODO :: STATE TO CONFIG
-                System.out.println("closing...");
+                ConfigLoader.save(tracker);
+                // TODO :: SAVE FILE QUESTION -> Non Saved Dialog or Close
             }
         });
         addComponentListener(new ComponentListener() {
 
             @Override
             public void componentResized(ComponentEvent e) {
-                // TODO :: CHANGE STATE
-                System.out.println(Notepad.this.getSize());
+                tracker.setSize(Notepad.this.getSize());
             }
 
             @Override
             public void componentMoved(ComponentEvent e) {
-                // TODO :: CHANGE STATE
-                System.out.println(Notepad.this.getLocationOnScreen());
+                tracker.setLocation(Notepad.this.getLocation());
             }
 
             @Override
