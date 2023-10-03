@@ -1,18 +1,34 @@
 package io.bigpel66.component.menu;
 
+import io.bigpel66.Notepad;
+
 import javax.swing.*;
 
-public class MenuBar extends JMenuBar {
+public final class MenuBar extends JMenuBar {
 
-    public static MenuBar newInstance() {
-        return new MenuBar();
+    private final FileMenu fileMenu;
+
+    private final EditMenu editMenu;
+
+    private final FormatMenu formatMenu;
+
+    private final HelpMenu helpMenu;
+
+    public static MenuBar newInstance(final Notepad context) {
+        return new MenuBar(context);
     }
 
-    private MenuBar() {
-        add(FileMenu.newInstance());
-        add(EditMenu.newInstance());
-        add(FormatMenu.newInstance());
-        add(HelpMenu.newInstance());
+    private MenuBar(final Notepad context) {
+        context.add(this);
+        context.setJMenuBar(this);
+        fileMenu = FileMenu.newInstance(context);
+        editMenu = EditMenu.newInstance(context);
+        formatMenu = FormatMenu.newInstance(context);
+        helpMenu = HelpMenu.newInstance(context);
+        add(fileMenu);
+        add(editMenu);
+        add(formatMenu);
+        add(helpMenu);
     }
 
 }

@@ -1,9 +1,5 @@
 package io.bigpel66;
 
-import io.bigpel66.component.menu.EditMenu;
-import io.bigpel66.component.menu.FileMenu;
-import io.bigpel66.component.menu.FormatMenu;
-import io.bigpel66.component.menu.HelpMenu;
 import io.bigpel66.component.menu.MenuBar;
 import io.bigpel66.component.text.ScrollableTextArea;
 import io.bigpel66.config.Config;
@@ -51,13 +47,13 @@ public final class Notepad extends JFrame implements ActionListener {
     }
 
     private void setMenuBarLayout() {
-        add(MenuBar.newInstance());
+        MenuBar.newInstance(this);
     }
 
     private void setTextAreaLayout() {
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
-        contentPane.add(ScrollableTextArea.newInstance());
+        ScrollableTextArea.newInstance(contentPane);
     }
 
     private void setState() {
