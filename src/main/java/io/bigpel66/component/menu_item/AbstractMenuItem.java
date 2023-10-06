@@ -1,12 +1,15 @@
 package io.bigpel66.component.menu_item;
 
 import io.bigpel66.Notepad;
+import io.bigpel66.component.Component;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.Optional;
 
-public class AbstractMenuItem extends JMenuItem {
+public class AbstractMenuItem extends JMenuItem implements Component {
+
+    private final Notepad context;
 
     public static Builder builder() {
         return new Builder();
@@ -59,10 +62,21 @@ public class AbstractMenuItem extends JMenuItem {
 
     private AbstractMenuItem(final Builder builder) {
         super(Optional.of(builder.title).orElse("?"));
+        this.context = builder.context;
         Optional.ofNullable(builder.index).ifPresent(e -> builder.context.getJMenuBar().getMenu(e).add(this));
         Optional.ofNullable(builder.context).ifPresent(this::addActionListener);
         Optional.ofNullable(builder.actionListener).ifPresent(this::addActionListener);
         Optional.ofNullable(builder.keyStroke).ifPresent(this::setAccelerator);
+    }
+
+    @Override
+    public Notepad getContext() {
+        return context;
+    }
+
+    @Override
+    public java.awt.Component getJComponent() {
+        return this;
     }
 
 }

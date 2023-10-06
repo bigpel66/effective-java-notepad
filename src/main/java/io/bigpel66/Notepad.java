@@ -1,7 +1,8 @@
 package io.bigpel66;
 
+import io.bigpel66.component.layout.AbstractScrollableLayout;
 import io.bigpel66.component.menu_bar.PrimaryMenuBar;
-import io.bigpel66.component.text.ScrollableTextArea;
+import io.bigpel66.component.text_area.AbstractStatefulTextArea;
 import io.bigpel66.config.Config;
 import io.bigpel66.utility.ConfigLoader;
 import io.bigpel66.utility.StateTracker;
@@ -54,7 +55,7 @@ public final class Notepad extends JFrame implements ActionListener {
     }
 
     private void setTextAreaLayout() {
-        ScrollableTextArea.registerTo(this);
+        AbstractScrollableLayout.registerTo(AbstractStatefulTextArea.newInstance(this));
     }
 
     private void setState() {

@@ -1,59 +1,68 @@
-package io.bigpel66.component.text;
+package io.bigpel66.component.text_area;
 
 import io.bigpel66.Notepad;
+import io.bigpel66.component.Component;
 import io.bigpel66.utility.StateTracker;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.*;
 import java.util.Objects;
 
-public final class ScrollableTextArea extends JScrollPane {
+public class AbstractStatefulTextArea extends JTextArea implements Component {
 
-    public static void registerTo(final Notepad context) {
-        new ScrollableTextArea(context);
+    private final Notepad context;
+
+    public static AbstractStatefulTextArea newInstance(final Notepad context) {
+        return new AbstractStatefulTextArea(context);
     }
 
-    private ScrollableTextArea(final Notepad context) {
-        super(new JTextArea(context.getStateTracker().getContents()));
-        Container container = context.getContentPane();
-        container.setLayout(new BorderLayout());
-        JTextArea textArea = (JTextArea) getViewport().getView();
-        textArea.getDocument().addDocumentListener(new DocumentListener() {
+    protected AbstractStatefulTextArea(final Notepad context) {
+        super(context.getStateTracker().getContents());
+        this.context = context;
+        getDocument().addDocumentListener(new DocumentListener() {
 
             @Override
             public void insertUpdate(DocumentEvent e) {
                 StateTracker stateTracker = context.getStateTracker();
-                int newHash = Objects.hash(textArea.getText());
+                int newHash = Objects.hash(getText());
                 if (newHash != stateTracker.getHash()) {
                     stateTracker.setHash(newHash);
-                    stateTracker.setContents(textArea.getText());
+                    stateTracker.setContents(getText());
                 }
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 StateTracker stateTracker = context.getStateTracker();
-                int newHash = Objects.hash(textArea.getText());
+                int newHash = Objects.hash(getText());
                 if (newHash != stateTracker.getHash()) {
                     stateTracker.setHash(newHash);
-                    stateTracker.setContents(textArea.getText());
+                    stateTracker.setContents(getText());
                 }
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
                 StateTracker stateTracker = context.getStateTracker();
-                int newHash = Objects.hash(textArea.getText());
+                int newHash = Objects.hash(getText());
                 if (newHash != stateTracker.getHash()) {
                     stateTracker.setHash(newHash);
-                    stateTracker.setContents(textArea.getText());
+                    stateTracker.setContents(getText());
                 }
             }
 
         });
-        container.add(this);
+    }
+
+    @Override
+    public Notepad getContext() {
+        return context;
+    }
+
+    @Override
+    public java.awt.Component getJComponent() {
+        return this;
     }
 
 }
