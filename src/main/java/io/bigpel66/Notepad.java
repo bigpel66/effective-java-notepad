@@ -1,6 +1,6 @@
 package io.bigpel66;
 
-import io.bigpel66.component.menu.AbstractMenuBar;
+import io.bigpel66.component.menu_bar.PrimaryMenuBar;
 import io.bigpel66.component.text.ScrollableTextArea;
 import io.bigpel66.config.Config;
 import io.bigpel66.utility.ConfigLoader;
@@ -15,8 +15,8 @@ public final class Notepad extends JFrame implements ActionListener {
 
     private final StateTracker tracker;
 
-    public static Notepad newInstance(final Config config) {
-        return new Notepad(config);
+    public static void execute(final Config config) {
+        new Notepad(config);
     }
 
     private Notepad(final Config config) {
@@ -50,11 +50,11 @@ public final class Notepad extends JFrame implements ActionListener {
     }
 
     private void setMenuBarLayout() {
-        AbstractMenuBar.newInstance(this);
+        PrimaryMenuBar.registerTo(this);
     }
 
     private void setTextAreaLayout() {
-        ScrollableTextArea.newInstance(this);
+        ScrollableTextArea.registerTo(this);
     }
 
     private void setState() {
@@ -93,7 +93,7 @@ public final class Notepad extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        Notepad.newInstance(ConfigLoader.load());
+        Notepad.execute(ConfigLoader.load());
     }
 
 }

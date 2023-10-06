@@ -1,6 +1,7 @@
 package io.bigpel66.component.menu;
 
 import io.bigpel66.Notepad;
+import io.bigpel66.component.menu_item.AbstractMenuItem;
 
 public final class FormatMenu extends AbstractMenu {
 
@@ -9,8 +10,8 @@ public final class FormatMenu extends AbstractMenu {
     private static final int INDEX = 2;
 
 
-    public static FormatMenu registerTo(final Notepad context) {
-        return new FormatMenu(context);
+    public static void registerTo(final Notepad context) {
+        new FormatMenu(context);
     }
 
     private FormatMenu(final Notepad context) {
@@ -39,6 +40,13 @@ public final class FormatMenu extends AbstractMenu {
                 .context(context)
                 .actionListener((e) -> System.out.println("background color"))
                 .build();
+    }
+
+    @Override
+    public String toString() {
+        return "Name : FormatMenu\n" +
+                "Title : " + TITLE + "\n" +
+                "Index : " + INDEX;
     }
 
 }

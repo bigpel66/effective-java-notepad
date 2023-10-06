@@ -1,4 +1,4 @@
-package io.bigpel66.component.menu;
+package io.bigpel66.component.menu_item;
 
 import io.bigpel66.Notepad;
 
@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.Optional;
 
-public final class AbstractMenuItem extends JMenuItem {
+public class AbstractMenuItem extends JMenuItem {
 
     public static Builder builder() {
         return new Builder();

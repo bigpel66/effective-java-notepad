@@ -1,6 +1,7 @@
 package io.bigpel66.component.menu;
 
 import io.bigpel66.Notepad;
+import io.bigpel66.component.menu_item.AbstractMenuItem;
 
 import javax.swing.*;
 import java.awt.event.InputEvent;
@@ -11,8 +12,8 @@ public final class FileMenu extends AbstractMenu {
 
     private static final int INDEX = 0;
 
-    public static FileMenu registerTo(final Notepad context) {
-        return new FileMenu(context);
+    public static void registerTo(final Notepad context) {
+        new FileMenu(context);
     }
 
     private FileMenu(final Notepad context) {
@@ -38,6 +39,13 @@ public final class FileMenu extends AbstractMenu {
                 .actionListener((e) -> System.out.println("save"))
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.META_DOWN_MASK))
                 .build();
+    }
+
+    @Override
+    public String toString() {
+        return "Name : FileMenu\n" +
+                "Title : " + TITLE + "\n" +
+                "Index : " + INDEX;
     }
 
 }

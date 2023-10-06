@@ -1,6 +1,7 @@
 package io.bigpel66.component.menu;
 
 import io.bigpel66.Notepad;
+import io.bigpel66.component.menu_item.AbstractMenuItem;
 
 public final class HelpMenu extends AbstractMenu {
 
@@ -9,8 +10,8 @@ public final class HelpMenu extends AbstractMenu {
     private static final int INDEX = 3;
 
 
-    public static HelpMenu registerTo(final Notepad context) {
-        return new HelpMenu(context);
+    public static void registerTo(final Notepad context) {
+        new HelpMenu(context);
     }
 
     private HelpMenu(final Notepad context) {
@@ -21,6 +22,13 @@ public final class HelpMenu extends AbstractMenu {
                 .context(context)
                 .actionListener((e) -> System.out.println("about"))
                 .build();
+    }
+
+    @Override
+    public String toString() {
+        return "Name : HelpMenu\n" +
+                "Title : " + TITLE + "\n" +
+                "Index : " + INDEX;
     }
 
 }

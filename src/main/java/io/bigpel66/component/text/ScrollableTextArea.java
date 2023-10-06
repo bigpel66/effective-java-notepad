@@ -11,16 +11,15 @@ import java.util.Objects;
 
 public final class ScrollableTextArea extends JScrollPane {
 
-    private final JTextArea textArea;
-
-    public static ScrollableTextArea newInstance(final Notepad context) {
-        return new ScrollableTextArea(context, new JTextArea(context.getStateTracker().getContents()));
+    public static void registerTo(final Notepad context) {
+        new ScrollableTextArea(context);
     }
 
-    private ScrollableTextArea(final Notepad context, final JTextArea textArea) {
-        super(textArea);
+    private ScrollableTextArea(final Notepad context) {
+        super(new JTextArea(context.getStateTracker().getContents()));
         Container container = context.getContentPane();
         container.setLayout(new BorderLayout());
+        JTextArea textArea = (JTextArea) getViewport().getView();
         textArea.getDocument().addDocumentListener(new DocumentListener() {
 
             @Override
@@ -54,12 +53,7 @@ public final class ScrollableTextArea extends JScrollPane {
             }
 
         });
-        this.textArea = textArea;
         container.add(this);
-    }
-
-    public JTextArea getTextArea() {
-        return textArea;
     }
 
 }
