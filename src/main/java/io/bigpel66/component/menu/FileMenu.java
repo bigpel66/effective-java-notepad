@@ -3,16 +3,15 @@ package io.bigpel66.component.menu;
 import io.bigpel66.Notepad;
 import io.bigpel66.component.menu_item.AbstractMenuItem;
 import io.bigpel66.component.text_area.AbstractStatefulTextArea;
+import io.bigpel66.utility.ConfigLoader;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public final class FileMenu extends AbstractMenu {
     private static final String TITLE = "File";
@@ -20,6 +19,7 @@ public final class FileMenu extends AbstractMenu {
     private static final int INDEX = 0;
 
     private final ActionListener newConsumer = (e) -> {
+        Notepad.execute(ConfigLoader.load(true));
     };
 
     private final ActionListener openConsumer = (e) -> {
@@ -75,7 +75,7 @@ public final class FileMenu extends AbstractMenu {
                 .title("New")
                 .index(INDEX)
                 .context(context)
-                .actionListener((e) -> System.out.println("new"))
+                .actionListener(newConsumer)
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.META_DOWN_MASK))
                 .build();
         AbstractMenuItem.builder()

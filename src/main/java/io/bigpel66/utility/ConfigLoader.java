@@ -23,8 +23,8 @@ public final class ConfigLoader {
 
     private static final Path configFilePath = Paths.get(homeDirectoryName, configDirectoryName, configFileName);
 
-    public static Config load() {
-        if (configExists()) {
+    public static Config load(boolean isForcedDefault) {
+        if (!isForcedDefault && configExists()) {
             Map<ConfigKey, Object> configMap = parseConfig();
             return AbstractConfig.of(configMap);
         }
@@ -93,9 +93,7 @@ public final class ConfigLoader {
         }
         File configFile = new File(configFilePath.toString());
         try {
-            if (!configFile.createNewFile()) {
-                throw new RuntimeException("config file cannot be created");
-            }
+            configFile.createNewFile();
         } catch (IOException e) {
             throw new RuntimeException("config file cannot be created");
         }

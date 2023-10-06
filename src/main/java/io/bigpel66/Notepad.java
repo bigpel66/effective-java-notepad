@@ -94,7 +94,7 @@ public final class Notepad extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        Notepad.execute(ConfigLoader.load());
+        Notepad.execute(ConfigLoader.load(false));
     }
 
 }
