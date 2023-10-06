@@ -2,26 +2,25 @@ package io.bigpel66.component.menu;
 
 import io.bigpel66.Notepad;
 
-import javax.swing.*;
-
-public final class HelpMenu extends JMenu {
+public final class HelpMenu extends AbstractMenu {
 
     private static final String TITLE = "Help";
 
-    private final MenuItem aboutItem;
+    private static final int INDEX = 3;
 
-    public static HelpMenu newInstance(final Notepad context) {
+
+    public static HelpMenu registerTo(final Notepad context) {
         return new HelpMenu(context);
     }
 
     private HelpMenu(final Notepad context) {
-        super(TITLE);
-        aboutItem = MenuItem.newInstance(context, "About");
-        add(aboutItem);
-    }
-
-    public MenuItem getAboutItem() {
-        return aboutItem;
+        super(context, TITLE);
+        AbstractMenuItem.builder()
+                .title("About")
+                .index(INDEX)
+                .context(context)
+                .actionListener((e) -> System.out.println("about"))
+                .build();
     }
 
 }

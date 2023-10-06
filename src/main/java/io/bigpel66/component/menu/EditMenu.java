@@ -3,49 +3,49 @@ package io.bigpel66.component.menu;
 import io.bigpel66.Notepad;
 
 import javax.swing.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
-public final class EditMenu extends JMenu {
+public final class EditMenu extends AbstractMenu {
 
     private static final String TITLE = "Edit";
 
-    private final MenuItem cutItem;
+    private static final int INDEX = 1;
 
-    private final MenuItem copyItem;
-
-    private final MenuItem pasteItem;
-
-    private final MenuItem selectAllItem;
-
-    public static EditMenu newInstance(final Notepad context) {
+    public static EditMenu registerTo(final Notepad context) {
         return new EditMenu(context);
     }
 
     private EditMenu(final Notepad context) {
-        super(TITLE);
-        cutItem = MenuItem.newInstance(context, "Cut");
-        copyItem = MenuItem.newInstance(context, "Copy");
-        pasteItem = MenuItem.newInstance(context, "Paste");
-        selectAllItem = MenuItem.newInstance(context, "Select All");
-        add(cutItem);
-        add(copyItem);
-        add(pasteItem);
-        add(selectAllItem);
-    }
-
-    public MenuItem getCutItem() {
-        return cutItem;
-    }
-
-    public MenuItem getCopyItem() {
-        return copyItem;
-    }
-
-    public MenuItem getPasteItem() {
-        return pasteItem;
-    }
-
-    public MenuItem getSelectAllItem() {
-        return selectAllItem;
+        super(context, TITLE);
+        AbstractMenuItem.builder()
+                .title("Cut")
+                .index(INDEX)
+                .context(context)
+                .actionListener((e) -> System.out.println("cut"))
+                .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.META_DOWN_MASK))
+                .build();
+        AbstractMenuItem.builder()
+                .title("Copy")
+                .index(INDEX)
+                .context(context)
+                .actionListener((e) -> System.out.println("copy"))
+                .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.META_DOWN_MASK))
+                .build();
+        AbstractMenuItem.builder()
+                .title("Paste")
+                .index(INDEX)
+                .context(context)
+                .actionListener((e) -> System.out.println("paste"))
+                .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.META_DOWN_MASK))
+                .build();
+        AbstractMenuItem.builder()
+                .title("Select All")
+                .index(INDEX)
+                .context(context)
+                .actionListener((e) -> System.out.println("select all"))
+                .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.META_DOWN_MASK))
+                .build();
     }
 
 }
