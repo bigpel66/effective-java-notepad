@@ -14,6 +14,8 @@ public final class StateTracker {
 
     private int hash;
 
+    private boolean isHelpOpened;
+
     public static Builder builder() {
         return new Builder();
     }
@@ -24,6 +26,7 @@ public final class StateTracker {
         title = builder.title;
         contents = builder.contents;
         hash = builder.hash;
+        isHelpOpened = builder.isHelpOpened;
     }
 
     public static class Builder {
@@ -37,6 +40,8 @@ public final class StateTracker {
         private String contents;
 
         private int hash;
+
+        private boolean isHelpOpened;
 
         private Builder() {
         }
@@ -66,6 +71,11 @@ public final class StateTracker {
             return this;
         }
 
+        public Builder isHelpOpened(final boolean v) {
+            isHelpOpened = v;
+            return this;
+        }
+
         public StateTracker build() {
             return new StateTracker(this);
         }
@@ -92,6 +102,10 @@ public final class StateTracker {
         this.hash = hash;
     }
 
+    public void setHelpOpened(boolean helpOpened) {
+        isHelpOpened = helpOpened;
+    }
+
     public Point getLocation() {
         return location;
     }
@@ -110,6 +124,10 @@ public final class StateTracker {
 
     public int getHash() {
         return hash;
+    }
+
+    public boolean isHelpOpened() {
+        return isHelpOpened;
     }
 
 }

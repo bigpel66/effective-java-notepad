@@ -18,9 +18,7 @@ public final class FileMenu extends AbstractMenu {
 
     private static final int INDEX = 0;
 
-    private final ActionListener newConsumer = (e) -> {
-        Notepad.execute(ConfigLoader.load(true));
-    };
+    private final ActionListener newConsumer = (e) -> Notepad.execute(ConfigLoader.load(true));
 
     private final ActionListener openConsumer = (e) -> {
         JFileChooser chooser = new JFileChooser();
