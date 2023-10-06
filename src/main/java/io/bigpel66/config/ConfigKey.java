@@ -13,6 +13,7 @@ public enum ConfigKey {
     TITLE("New File"),
     CONTENTS(""),
     HASH(Objects.hash("")),
+    IS_CONTENTS_SAVED("true"),
     ;
 
     private final Object value;

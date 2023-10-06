@@ -14,4 +14,6 @@ public interface Config {
 
     int getHash();
 
+    boolean isContentsSaved();
+
 }

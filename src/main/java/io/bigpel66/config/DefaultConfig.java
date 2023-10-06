@@ -18,6 +18,8 @@ public final class DefaultConfig implements Config {
 
     private final int hash;
 
+    private final boolean isContentsSaved;
+
     public static DefaultConfig getInstance() {
         return DEFAULT_CONFIG;
     }
@@ -28,6 +30,7 @@ public final class DefaultConfig implements Config {
         title = TITLE.getValue();
         contents = CONTENTS.getValue();
         hash = HASH.getValue();
+        isContentsSaved = Boolean.parseBoolean(IS_CONTENTS_SAVED.getValue());
     }
 
     @Override
@@ -53,6 +56,11 @@ public final class DefaultConfig implements Config {
     @Override
     public int getHash() {
         return hash;
+    }
+
+    @Override
+    public boolean isContentsSaved() {
+        return isContentsSaved;
     }
 
 }

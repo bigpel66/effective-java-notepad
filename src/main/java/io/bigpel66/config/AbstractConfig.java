@@ -19,6 +19,8 @@ public class AbstractConfig implements Config {
 
     private final int hash;
 
+    private final boolean isContentsSaved;
+
     public static AbstractConfig of(final Map<ConfigKey, Object> configMap) {
         Objects.requireNonNull(configMap);
         return new AbstractConfig(configMap);
@@ -30,6 +32,7 @@ public class AbstractConfig implements Config {
         title = configMap.getOrDefault(TITLE, TITLE.getValue()).toString();
         contents = configMap.getOrDefault(CONTENTS, CONTENTS.getValue()).toString();
         hash = toInt(configMap.getOrDefault(HASH, HASH.getValue()));
+        isContentsSaved = Boolean.parseBoolean((String) configMap.getOrDefault(IS_CONTENTS_SAVED, IS_CONTENTS_SAVED.getValue()));
     }
 
     @Override
@@ -55,6 +58,11 @@ public class AbstractConfig implements Config {
     @Override
     public int getHash() {
         return hash;
+    }
+
+    @Override
+    public boolean isContentsSaved() {
+        return isContentsSaved;
     }
 
 }

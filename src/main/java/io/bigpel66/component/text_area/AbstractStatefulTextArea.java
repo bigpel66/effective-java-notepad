@@ -30,6 +30,7 @@ public class AbstractStatefulTextArea extends JTextArea implements Component {
                     stateTracker.setHash(newHash);
                     stateTracker.setContents(getText());
                 }
+                stateTracker.setContentsSaved(false);
             }
 
             @Override
@@ -40,6 +41,7 @@ public class AbstractStatefulTextArea extends JTextArea implements Component {
                     stateTracker.setHash(newHash);
                     stateTracker.setContents(getText());
                 }
+                stateTracker.setContentsSaved(false);
             }
 
             @Override
@@ -50,6 +52,7 @@ public class AbstractStatefulTextArea extends JTextArea implements Component {
                     stateTracker.setHash(newHash);
                     stateTracker.setContents(getText());
                 }
+                stateTracker.setContentsSaved(false);
             }
 
         });

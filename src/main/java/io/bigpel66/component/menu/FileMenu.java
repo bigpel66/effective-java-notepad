@@ -57,6 +57,7 @@ public final class FileMenu extends AbstractMenu {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(selectedFile.getPath()))) {
             bw.write(getContext().getStateTracker().getContents());
             getContext().getStateTracker().setTitle(selectedFile.getName());
+            getContext().getStateTracker().setContentsSaved(true);
             getContext().setTitle(selectedFile.getName());
         } catch (IOException ex) {
             throw new RuntimeException("file cannot be saved");
