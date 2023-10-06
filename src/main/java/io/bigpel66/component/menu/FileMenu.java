@@ -2,15 +2,68 @@ package io.bigpel66.component.menu;
 
 import io.bigpel66.Notepad;
 import io.bigpel66.component.menu_item.AbstractMenuItem;
+import io.bigpel66.component.text_area.AbstractStatefulTextArea;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.*;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 public final class FileMenu extends AbstractMenu {
     private static final String TITLE = "File";
 
     private static final int INDEX = 0;
+
+    private final ActionListener newConsumer = (e) -> {
+    };
+
+    private final ActionListener openConsumer = (e) -> {
+        JFileChooser chooser = new JFileChooser();
+        int option = chooser.showOpenDialog(getContext());
+        if (option != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+        for (Component component : getContext().getContentPane().getComponents()) {
+            if (!(component instanceof JScrollPane)) {
+                continue;
+            }
+            AbstractStatefulTextArea textArea = (AbstractStatefulTextArea) ((JScrollPane) component).getViewport().getView();
+            textArea.setText("");
+            File selectedFile = chooser.getSelectedFile();
+            try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
+                while (true) {
+                    Optional<String> line = Optional.ofNullable(br.readLine());
+                    if (line.isEmpty()) {
+                        break;
+                    }
+                    textArea.append(line.get());
+                }
+            } catch (IOException ex) {
+                throw new RuntimeException("file cannot be opened");
+            }
+        }
+    };
+
+    private final ActionListener saveConsumer = (e) -> {
+        JFileChooser chooser = new JFileChooser();
+        int option = chooser.showSaveDialog(getContext());
+        if (option != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+        File selectedFile = chooser.getSelectedFile();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(selectedFile.getPath()))) {
+            bw.write(getContext().getStateTracker().getContents());
+            getContext().getStateTracker().setTitle(selectedFile.getName());
+            getContext().setTitle(selectedFile.getName());
+        } catch (IOException ex) {
+            throw new RuntimeException("file cannot be saved");
+        }
+    };
 
     public static void registerTo(final Notepad context) {
         new FileMenu(context);
@@ -29,14 +82,14 @@ public final class FileMenu extends AbstractMenu {
                 .title("Open")
                 .index(INDEX)
                 .context(context)
-                .actionListener((e) -> System.out.println("open"))
+                .actionListener(openConsumer)
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.META_DOWN_MASK))
                 .build();
         AbstractMenuItem.builder()
                 .title("Save")
                 .index(INDEX)
                 .context(context)
-                .actionListener((e) -> System.out.println("save"))
+                .actionListener(saveConsumer)
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.META_DOWN_MASK))
                 .build();
     }
