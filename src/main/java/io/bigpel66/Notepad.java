@@ -16,6 +16,8 @@ public final class Notepad extends JFrame implements ActionListener {
 
     private final StateTracker tracker;
 
+    private final Timer timer;
+
     public static void execute(final Config config) {
         new Notepad(config);
     }
@@ -35,12 +37,12 @@ public final class Notepad extends JFrame implements ActionListener {
         setContext();
         setVisible(true);
         setState();
-        new Timer(1000, e -> ConfigLoader.save(tracker)).start();
+        timer = new Timer(1000, e -> ConfigLoader.save(tracker));
+        timer.start();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO :: EVENT AND KEY STROKE
     }
 
     private void setContext() {
@@ -49,7 +51,7 @@ public final class Notepad extends JFrame implements ActionListener {
         setTitle(config.getTitle());
         setMenuBarLayout();
         setTextAreaLayout();
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
     private void setMenuBarLayout() {
@@ -64,8 +66,27 @@ public final class Notepad extends JFrame implements ActionListener {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                ConfigLoader.save(tracker);
-                // TODO :: SAVE FILE QUESTION -> Non Saved Dialog or Close
+                timer.stop();
+                if (tracker.isContentsSaved()) {
+                    dispose();
+                    return;
+                }
+                int option = JOptionPane.showConfirmDialog(
+                        Notepad.this,
+                        "Do you want to save the changes?",
+                        "Save Confirmation",
+                        JOptionPane.YES_NO_OPTION
+                );
+                if (option == JOptionPane.NO_OPTION) {
+                    ConfigLoader.removeConfig();
+                    dispose();
+                } else if (option == JOptionPane.YES_NO_OPTION) {
+                    getJMenuBar().getMenu(0).getItem(2).doClick();
+                    ConfigLoader.save(tracker);
+                    dispose();
+                } else {
+                    timer.start();
+                }
             }
         });
         addComponentListener(new ComponentListener() {

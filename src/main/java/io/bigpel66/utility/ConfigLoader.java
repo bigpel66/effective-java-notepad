@@ -28,12 +28,13 @@ public final class ConfigLoader {
             Map<ConfigKey, Object> configMap = parseConfig();
             return AbstractConfig.of(configMap);
         }
+        removeConfig();
         createConfig();
         fillDefaultConfig();
         return DefaultConfig.getInstance();
     }
 
-    public static void save(final StateTracker tracker) {
+    synchronized public static void save(final StateTracker tracker) {
         String replaced = tracker.getContents()
                 .replaceAll("\\n", "\\\\n")
                 .replaceAll("\\f", "\\\\f");
@@ -53,12 +54,22 @@ public final class ConfigLoader {
         }
     }
 
-    private static boolean configExists() {
+    synchronized public static void removeConfig() {
+        File configFile = new File(configFilePath.toString());
+        try {
+            boolean delete = configFile.delete();
+            System.out.println(delete);
+        } catch (SecurityException e) {
+            throw new RuntimeException("config file cannot be removed");
+        }
+    }
+
+    synchronized private static boolean configExists() {
         File configFile = new File(configFilePath.toString());
         return configFile.exists();
     }
 
-    private static Map<ConfigKey, Object> parseConfig() {
+    synchronized private static Map<ConfigKey, Object> parseConfig() {
         Map<ConfigKey, Object> configMap = new HashMap<>();
         File configFile = new File(configFilePath.toString());
         try (BufferedReader br = new BufferedReader(new FileReader(configFile))) {
@@ -87,7 +98,7 @@ public final class ConfigLoader {
         return tokens == null || tokens.length != 2;
     }
 
-    private static void createConfig() {
+    synchronized private static void createConfig() {
         File configDirectory = new File(configDirectoryPath.toString());
         if (!configDirectory.exists() && configDirectory.mkdirs()) {
             throw new RuntimeException("config directory cannot be created");
@@ -100,7 +111,7 @@ public final class ConfigLoader {
         }
     }
 
-    private static void fillDefaultConfig() {
+    synchronized private static void fillDefaultConfig() {
         StringBuilder sb = new StringBuilder();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(configFilePath.toString()))) {
             ConfigKey[] values = ConfigKey.values();
