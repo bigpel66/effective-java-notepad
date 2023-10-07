@@ -13,6 +13,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import static io.bigpel66.component.menu.MenuKey.FILE;
+import static io.bigpel66.component.menu_item.FileMenuItemKey.SAVE;
+
 public final class Notepad extends JFrame implements ActionListener {
 
     private final Config config;
@@ -90,7 +93,7 @@ public final class Notepad extends JFrame implements ActionListener {
                     ConfigLoader.removeConfig();
                     dispose();
                 } else if (option == JOptionPane.YES_NO_OPTION) {
-                    getJMenuBar().getMenu(0).getItem(2).doClick();
+                    getJMenuBar().getMenu(FILE.ordinal()).getItem(SAVE.ordinal()).doClick();
                     ConfigLoader.save(tracker);
                     dispose();
                 } else {
