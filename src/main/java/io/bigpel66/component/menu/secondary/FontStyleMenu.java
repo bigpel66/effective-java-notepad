@@ -26,7 +26,7 @@ public final class FontStyleMenu extends AbstractMenu {
                 .parent(this)
                 .actionListener((e) -> {
                     JTextArea textArea = Objects.requireNonNull(context.getJTextArea());
-                    textArea.setFont(new Font(defaultFont.getFontName(), Font.PLAIN, defaultFont.getSize()));
+                    textArea.setFont(new Font(defaultFont.getFontName(), Font.PLAIN, textArea.getFont().getSize()));
                 })
                 .build();
         String[] fontNames = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
@@ -41,7 +41,7 @@ public final class FontStyleMenu extends AbstractMenu {
                     .parent(this)
                     .actionListener((e) -> {
                         JTextArea textArea = Objects.requireNonNull(context.getJTextArea());
-                        textArea.setFont(new Font(fontNames[copyIndex], Font.PLAIN, defaultFont.getSize()));
+                        textArea.setFont(new Font(fontNames[copyIndex], Font.PLAIN, textArea.getFont().getSize()));
                     })
                     .build();
         }
