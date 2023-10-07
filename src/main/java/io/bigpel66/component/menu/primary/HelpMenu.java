@@ -1,6 +1,8 @@
-package io.bigpel66.component.menu;
+package io.bigpel66.component.menu.primary;
 
 import io.bigpel66.Notepad;
+import io.bigpel66.component.Component;
+import io.bigpel66.component.menu.AbstractMenu;
 import io.bigpel66.component.menu_item.AbstractMenuItem;
 
 import javax.swing.*;
@@ -9,8 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import static io.bigpel66.component.menu.MenuKey.HELP;
-import static io.bigpel66.component.menu_item.HelpMenuItemKey.*;
+import static io.bigpel66.component.menu.primary.MenuKey.HELP;
+import static io.bigpel66.component.menu_item.primary.HelpMenuItemKey.ABOUT;
 
 public final class HelpMenu extends AbstractMenu {
 
@@ -40,12 +42,12 @@ public final class HelpMenu extends AbstractMenu {
         dialog.setVisible(true);
     };
 
-    public static void registerTo(final Notepad context) {
-        new HelpMenu(context);
+    public static void registerTo(final Notepad context, final Component parent) {
+        new HelpMenu(context, parent);
     }
 
-    private HelpMenu(final Notepad context) {
-        super(context, HELP.getValue());
+    private HelpMenu(final Notepad context, final Component parent) {
+        super(context, parent, HELP.getValue());
         AbstractMenuItem.builder()
                 .title(ABOUT.getValue())
                 .index(HELP.ordinal())

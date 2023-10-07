@@ -75,7 +75,7 @@ public class AbstractMenuItem extends JMenuItem implements Component {
     }
 
     @Override
-    public java.awt.Component getJComponent() {
+    public JComponent getJComponent() {
         return this;
     }
 

@@ -9,10 +9,10 @@ public class AbstractMenu extends JMenu implements Component {
 
     private final Notepad context;
 
-    protected AbstractMenu(final Notepad context, final String title) {
+    protected AbstractMenu(final Notepad context, final Component parent, final String title) {
         super(title);
         this.context = context;
-        context.getJMenuBar().add(this);
+        parent.getJComponent().add(this);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class AbstractMenu extends JMenu implements Component {
     }
 
     @Override
-    public java.awt.Component getJComponent() {
+    public JComponent getJComponent() {
         return this;
     }
 

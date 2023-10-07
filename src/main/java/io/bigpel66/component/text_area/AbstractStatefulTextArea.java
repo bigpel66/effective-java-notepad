@@ -64,7 +64,7 @@ public class AbstractStatefulTextArea extends JTextArea implements Component {
     }
 
     @Override
-    public java.awt.Component getJComponent() {
+    public JComponent getJComponent() {
         return this;
     }
 

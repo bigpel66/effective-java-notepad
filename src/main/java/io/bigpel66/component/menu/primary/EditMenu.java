@@ -1,6 +1,8 @@
-package io.bigpel66.component.menu;
+package io.bigpel66.component.menu.primary;
 
 import io.bigpel66.Notepad;
+import io.bigpel66.component.Component;
+import io.bigpel66.component.menu.AbstractMenu;
 import io.bigpel66.component.menu_item.AbstractMenuItem;
 
 import javax.swing.*;
@@ -9,17 +11,17 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.Objects;
 
-import static io.bigpel66.component.menu.MenuKey.EDIT;
-import static io.bigpel66.component.menu_item.EditMenuItemKey.*;
+import static io.bigpel66.component.menu.primary.MenuKey.EDIT;
+import static io.bigpel66.component.menu_item.primary.EditMenuItemKey.*;
 
 public final class EditMenu extends AbstractMenu {
 
-    public static void registerTo(final Notepad context) {
-        new EditMenu(context);
+    public static void registerTo(final Notepad context, final Component parent) {
+        new EditMenu(context, parent);
     }
 
-    private EditMenu(final Notepad context) {
-        super(context, EDIT.getValue());
+    private EditMenu(final Notepad context, final Component parent) {
+        super(context, parent, EDIT.getValue());
         AbstractMenuItem.builder()
                 .title(CUT.getValue())
                 .index(EDIT.ordinal())

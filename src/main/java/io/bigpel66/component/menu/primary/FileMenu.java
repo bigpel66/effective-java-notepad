@@ -1,6 +1,8 @@
-package io.bigpel66.component.menu;
+package io.bigpel66.component.menu.primary;
 
 import io.bigpel66.Notepad;
+import io.bigpel66.component.Component;
+import io.bigpel66.component.menu.AbstractMenu;
 import io.bigpel66.component.menu_item.AbstractMenuItem;
 import io.bigpel66.utility.ConfigLoader;
 
@@ -12,8 +14,8 @@ import java.io.*;
 import java.util.Objects;
 import java.util.Optional;
 
-import static io.bigpel66.component.menu.MenuKey.FILE;
-import static io.bigpel66.component.menu_item.FileMenuItemKey.*;
+import static io.bigpel66.component.menu.primary.MenuKey.FILE;
+import static io.bigpel66.component.menu_item.primary.FileMenuItemKey.*;
 
 public final class FileMenu extends AbstractMenu {
 
@@ -61,12 +63,12 @@ public final class FileMenu extends AbstractMenu {
         }
     };
 
-    public static void registerTo(final Notepad context) {
-        new FileMenu(context);
+    public static void registerTo(final Notepad context, final Component parent) {
+        new FileMenu(context, parent);
     }
 
-    private FileMenu(final Notepad context) {
-        super(context, FILE.getValue());
+    private FileMenu(final Notepad context, final Component parent) {
+        super(context, parent, FILE.getValue());
         AbstractMenuItem.builder()
                 .title(NEW.getValue())
                 .index(FILE.ordinal())

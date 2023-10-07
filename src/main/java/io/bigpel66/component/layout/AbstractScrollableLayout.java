@@ -28,7 +28,7 @@ public class AbstractScrollableLayout extends JScrollPane implements Component {
     }
 
     @Override
-    public java.awt.Component getJComponent() {
+    public JComponent getJComponent() {
         return this;
     }
 

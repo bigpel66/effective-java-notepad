@@ -1,4 +1,4 @@
-package io.bigpel66.component.menu_item;
+package io.bigpel66.component.menu_item.primary;
 
 public enum EditMenuItemKey {
 

@@ -13,8 +13,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import static io.bigpel66.component.menu.MenuKey.FILE;
-import static io.bigpel66.component.menu_item.FileMenuItemKey.SAVE;
+import static io.bigpel66.component.menu.primary.MenuKey.FILE;
+import static io.bigpel66.component.menu_item.primary.FileMenuItemKey.SAVE;
 
 public final class Notepad extends JFrame implements ActionListener {
 

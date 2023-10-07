@@ -1,12 +1,16 @@
-package io.bigpel66.component.menu_item;
+package io.bigpel66.component.menu.primary;
 
-public enum HelpMenuItemKey {
+public enum MenuKey {
 
-    ABOUT("About");
+    FILE("File"),
+    EDIT("Edit"),
+    FORMAT("Format"),
+    HELP("Help"),
+    ;
 
     private final Object value;
 
-    <T> HelpMenuItemKey(final T v) {
+    <T> MenuKey(final T v) {
         value = v;
     }
 

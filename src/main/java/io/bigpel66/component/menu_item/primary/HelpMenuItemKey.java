@@ -1,15 +1,12 @@
-package io.bigpel66.component.menu_item;
+package io.bigpel66.component.menu_item.primary;
 
-public enum FileMenuItemKey {
+public enum HelpMenuItemKey {
 
-    NEW("New"),
-    OPEN("Open"),
-    SAVE("Save"),
-    ;
+    ABOUT("About");
 
     private final Object value;
 
-    <T> FileMenuItemKey(final T v) {
+    <T> HelpMenuItemKey(final T v) {
         value = v;
     }
 
