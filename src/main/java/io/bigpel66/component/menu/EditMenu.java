@@ -2,7 +2,6 @@ package io.bigpel66.component.menu;
 
 import io.bigpel66.Notepad;
 import io.bigpel66.component.menu_item.AbstractMenuItem;
-import io.bigpel66.component.text_area.AbstractStatefulTextArea;
 
 import javax.swing.*;
 import java.awt.*;
