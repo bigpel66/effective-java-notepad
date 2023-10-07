@@ -1,5 +1,7 @@
 package io.bigpel66;
 
+
+import com.apple.eawt.Application;
 import io.bigpel66.component.layout.AbstractScrollableLayout;
 import io.bigpel66.component.menu_bar.PrimaryMenuBar;
 import io.bigpel66.component.text_area.AbstractStatefulTextArea;
@@ -47,6 +49,12 @@ public final class Notepad extends JFrame implements ActionListener {
     }
 
     private void setContext() {
+        Image image = new ImageIcon(ClassLoader.getSystemResource("icon.png")).getImage();
+        try {
+            Application.getApplication().setDockIconImage(image);
+        } catch (Throwable throwable) {
+        }
+        setIconImage(image);
         setSize(config.getSize());
         setLocation(config.getLocation());
         setTitle(config.getTitle());
