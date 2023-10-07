@@ -46,7 +46,7 @@ public final class EditMenu extends AbstractMenu {
                 .title("Select All")
                 .index(INDEX)
                 .context(context)
-                .actionListener((e) -> System.out.println("select all"))
+                .actionListener((e) -> Objects.requireNonNull(context.getJTextArea()).selectAll())
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.META_DOWN_MASK))
                 .build();
     }
