@@ -2,10 +2,9 @@ package io.bigpel66.component.menu.primary;
 
 import io.bigpel66.Notepad;
 import io.bigpel66.component.Component;
-import io.bigpel66.component.menu.*;
+import io.bigpel66.component.menu.AbstractMenu;
 import io.bigpel66.component.menu.secondary.FontSizeMenu;
 import io.bigpel66.component.menu.secondary.FontStyleMenu;
-import io.bigpel66.component.menu.secondary.FormatMenuKey;
 import io.bigpel66.component.menu_item.AbstractMenuItem;
 
 import javax.swing.*;
@@ -13,7 +12,8 @@ import java.awt.*;
 import java.util.Objects;
 
 import static io.bigpel66.component.menu.primary.MenuKey.FORMAT;
-import static io.bigpel66.component.menu.secondary.FormatMenuKey.*;
+import static io.bigpel66.component.menu.secondary.FormatMenuKey.BACKGROUND_COLOR;
+import static io.bigpel66.component.menu.secondary.FormatMenuKey.FONT_COLOR;
 
 public final class FormatMenu extends AbstractMenu {
 
