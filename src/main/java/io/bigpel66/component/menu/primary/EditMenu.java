@@ -24,29 +24,29 @@ public final class EditMenu extends AbstractMenu {
         super(context, parent, EDIT.getValue());
         AbstractMenuItem.builder()
                 .title(CUT.getValue())
-                .index(EDIT.ordinal())
                 .context(context)
+                .parent(this)
                 .actionListener((e) -> Objects.requireNonNull(context.getJTextArea()).cut())
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()))
                 .build();
         AbstractMenuItem.builder()
                 .title(COPY.getValue())
-                .index(EDIT.ordinal())
                 .context(context)
+                .parent(this)
                 .actionListener((e) -> Objects.requireNonNull(context.getJTextArea()).copy())
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()))
                 .build();
         AbstractMenuItem.builder()
                 .title(PASTE.getValue())
-                .index(EDIT.ordinal())
                 .context(context)
+                .parent(this)
                 .actionListener((e) -> Objects.requireNonNull(context.getJTextArea()).paste())
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()))
                 .build();
         AbstractMenuItem.builder()
                 .title(SELECT_ALL.getValue())
-                .index(EDIT.ordinal())
                 .context(context)
+                .parent(this)
                 .actionListener((e) -> Objects.requireNonNull(context.getJTextArea()).selectAll())
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.META_DOWN_MASK))
                 .build();

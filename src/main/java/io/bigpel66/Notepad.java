@@ -71,7 +71,7 @@ public final class Notepad extends JFrame implements ActionListener {
     }
 
     private void setTextAreaLayout() {
-        AbstractScrollableLayout.registerTo(AbstractStatefulTextArea.newInstance(this));
+        AbstractScrollableLayout.registerTo(this, AbstractStatefulTextArea.newInstance(this));
     }
 
     private void setState() {

@@ -10,13 +10,13 @@ public class AbstractScrollableLayout extends JScrollPane implements Component {
 
     private final Notepad context;
 
-    public static void registerTo(final Component component) {
-        new AbstractScrollableLayout(component);
+    public static void registerTo(final Notepad context, final Component child) {
+        new AbstractScrollableLayout(context, child);
     }
 
-    protected AbstractScrollableLayout(final Component component) {
-        super(component.getJComponent());
-        context = component.getContext();
+    protected AbstractScrollableLayout(final Notepad context, final Component child) {
+        super(child.getJComponent());
+        this.context = context;
         Container container = context.getContentPane();
         container.setLayout(new BorderLayout());
         container.add(this);

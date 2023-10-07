@@ -71,22 +71,22 @@ public final class FileMenu extends AbstractMenu {
         super(context, parent, FILE.getValue());
         AbstractMenuItem.builder()
                 .title(NEW.getValue())
-                .index(FILE.ordinal())
                 .context(context)
+                .parent(this)
                 .actionListener(newConsumer)
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.META_DOWN_MASK))
                 .build();
         AbstractMenuItem.builder()
                 .title(OPEN.getValue())
-                .index(FILE.ordinal())
                 .context(context)
+                .parent(this)
                 .actionListener(openConsumer)
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.META_DOWN_MASK))
                 .build();
         AbstractMenuItem.builder()
                 .title(SAVE.getValue())
-                .index(FILE.ordinal())
                 .context(context)
+                .parent(this)
                 .actionListener(saveConsumer)
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.META_DOWN_MASK))
                 .build();

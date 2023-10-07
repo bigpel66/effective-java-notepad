@@ -50,8 +50,8 @@ public final class HelpMenu extends AbstractMenu {
         super(context, parent, HELP.getValue());
         AbstractMenuItem.builder()
                 .title(ABOUT.getValue())
-                .index(HELP.ordinal())
                 .context(context)
+                .parent(this)
                 .actionListener(helpConsumer)
                 .build();
     }

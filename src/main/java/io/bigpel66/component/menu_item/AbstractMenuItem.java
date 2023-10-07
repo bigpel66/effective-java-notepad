@@ -19,9 +19,9 @@ public class AbstractMenuItem extends JMenuItem implements Component {
 
         private String title;
 
-        private Integer index;
-
         private Notepad context;
+
+        private Component parent;
 
         private ActionListener actionListener;
 
@@ -35,13 +35,13 @@ public class AbstractMenuItem extends JMenuItem implements Component {
             return this;
         }
 
-        public Builder index(final Integer v) {
-            index = v;
+        public Builder context(final Notepad v) {
+            context = v;
             return this;
         }
 
-        public Builder context(final Notepad v) {
-            context = v;
+        public Builder parent(final Component v) {
+            parent = v;
             return this;
         }
 
@@ -58,12 +58,13 @@ public class AbstractMenuItem extends JMenuItem implements Component {
         public void build() {
             new AbstractMenuItem(this);
         }
+
     }
 
     private AbstractMenuItem(final Builder builder) {
         super(Optional.of(builder.title).orElse("?"));
         this.context = builder.context;
-        Optional.ofNullable(builder.index).ifPresent(e -> builder.context.getJMenuBar().getMenu(e).add(this));
+        Optional.ofNullable(builder.parent).ifPresent(e -> e.getJComponent().add(this));
         Optional.ofNullable(builder.context).ifPresent(this::addActionListener);
         Optional.ofNullable(builder.actionListener).ifPresent(this::addActionListener);
         Optional.ofNullable(builder.keyStroke).ifPresent(this::setAccelerator);
