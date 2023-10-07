@@ -19,13 +19,14 @@ public final class FontStyleMenu extends AbstractMenu {
 
     private FontStyleMenu(final Notepad context, final Component parent) {
         super(context, parent, FONT_STYLE.getValue());
+        Font defaultFont = UIManager.getFont("Label.font");
         AbstractMenuItem.builder()
-                .title(UIManager.getFont("Label.font").getFontName())
+                .title(defaultFont.getFontName())
                 .context(context)
                 .parent(this)
                 .actionListener((e) -> {
                     JTextArea textArea = Objects.requireNonNull(context.getJTextArea());
-                    textArea.setFont(new Font(UIManager.getFont("Label.font").getFontName(), Font.PLAIN, UIManager.getFont("Label.font").getSize()));
+                    textArea.setFont(new Font(defaultFont.getFontName(), Font.PLAIN, defaultFont.getSize()));
                 })
                 .build();
         String[] fontNames = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
@@ -40,7 +41,7 @@ public final class FontStyleMenu extends AbstractMenu {
                     .parent(this)
                     .actionListener((e) -> {
                         JTextArea textArea = Objects.requireNonNull(context.getJTextArea());
-                        textArea.setFont(new Font(fontNames[copyIndex], Font.PLAIN, UIManager.getFont("Label.font").getSize()));
+                        textArea.setFont(new Font(fontNames[copyIndex], Font.PLAIN, defaultFont.getSize()));
                     })
                     .build();
         }
