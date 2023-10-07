@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.*;
+import java.util.Objects;
 import java.util.Optional;
 
 public final class FileMenu extends AbstractMenu {
@@ -26,24 +27,22 @@ public final class FileMenu extends AbstractMenu {
         if (option != JFileChooser.APPROVE_OPTION) {
             return;
         }
-        for (Component component : getContext().getContentPane().getComponents()) {
-            if (!(component instanceof JScrollPane)) {
-                continue;
-            }
-            AbstractStatefulTextArea textArea = (AbstractStatefulTextArea) ((JScrollPane) component).getViewport().getView();
-            textArea.setText("");
-            File selectedFile = chooser.getSelectedFile();
-            try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
-                while (true) {
-                    Optional<String> line = Optional.ofNullable(br.readLine());
-                    if (line.isEmpty()) {
-                        break;
-                    }
-                    textArea.append(line.get());
+        JTextArea jTextArea = Objects.requireNonNull(getContext().getJTextArea());
+        jTextArea.setText("");
+        File selectedFile = chooser.getSelectedFile();
+        try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
+            while (true) {
+                Optional<String> line = Optional.ofNullable(br.readLine());
+                if (line.isEmpty()) {
+                    break;
                 }
-            } catch (IOException ex) {
-                throw new RuntimeException("file cannot be opened");
+                jTextArea.append(line.get());
             }
+            getContext().getStateTracker().setTitle(selectedFile.getName());
+            getContext().getStateTracker().setContentsSaved(true);
+            getContext().setTitle(selectedFile.getName());
+        } catch (IOException ex) {
+            throw new RuntimeException("file cannot be opened");
         }
     };
 

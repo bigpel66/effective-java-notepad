@@ -8,6 +8,7 @@ import io.bigpel66.utility.ConfigLoader;
 import io.bigpel66.utility.StateTracker;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public final class Notepad extends JFrame implements ActionListener {
@@ -114,6 +115,16 @@ public final class Notepad extends JFrame implements ActionListener {
 
     public StateTracker getStateTracker() {
         return tracker;
+    }
+
+    public JTextArea getJTextArea() {
+        for (Component component : getContentPane().getComponents()) {
+            if (!(component instanceof JScrollPane)) {
+                continue;
+            }
+            return (AbstractStatefulTextArea) ((JScrollPane) component).getViewport().getView();
+        }
+        return null;
     }
 
     public static void main(String[] args) {

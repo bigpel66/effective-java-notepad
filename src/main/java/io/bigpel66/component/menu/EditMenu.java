@@ -2,10 +2,13 @@ package io.bigpel66.component.menu;
 
 import io.bigpel66.Notepad;
 import io.bigpel66.component.menu_item.AbstractMenuItem;
+import io.bigpel66.component.text_area.AbstractStatefulTextArea;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.util.Objects;
 
 public final class EditMenu extends AbstractMenu {
 
@@ -23,22 +26,22 @@ public final class EditMenu extends AbstractMenu {
                 .title("Cut")
                 .index(INDEX)
                 .context(context)
-                .actionListener((e) -> System.out.println("cut"))
-                .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.META_DOWN_MASK))
+                .actionListener((e) -> Objects.requireNonNull(context.getJTextArea()).cut())
+                .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_X, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()))
                 .build();
         AbstractMenuItem.builder()
                 .title("Copy")
                 .index(INDEX)
                 .context(context)
-                .actionListener((e) -> System.out.println("copy"))
-                .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.META_DOWN_MASK))
+                .actionListener((e) -> Objects.requireNonNull(context.getJTextArea()).copy())
+                .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()))
                 .build();
         AbstractMenuItem.builder()
                 .title("Paste")
                 .index(INDEX)
                 .context(context)
-                .actionListener((e) -> System.out.println("paste"))
-                .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.META_DOWN_MASK))
+                .actionListener((e) -> Objects.requireNonNull(context.getJTextArea()).paste())
+                .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()))
                 .build();
         AbstractMenuItem.builder()
                 .title("Select All")
