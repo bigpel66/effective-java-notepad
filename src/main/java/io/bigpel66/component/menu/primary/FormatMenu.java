@@ -3,12 +3,17 @@ package io.bigpel66.component.menu.primary;
 import io.bigpel66.Notepad;
 import io.bigpel66.component.Component;
 import io.bigpel66.component.menu.*;
-import io.bigpel66.component.menu.secondary.BackgroundColorMenu;
-import io.bigpel66.component.menu.secondary.FontColorMenu;
 import io.bigpel66.component.menu.secondary.FontSizeMenu;
 import io.bigpel66.component.menu.secondary.FontStyleMenu;
+import io.bigpel66.component.menu.secondary.FormatMenuKey;
+import io.bigpel66.component.menu_item.AbstractMenuItem;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.Objects;
 
 import static io.bigpel66.component.menu.primary.MenuKey.FORMAT;
+import static io.bigpel66.component.menu.secondary.FormatMenuKey.*;
 
 public final class FormatMenu extends AbstractMenu {
 
@@ -20,8 +25,26 @@ public final class FormatMenu extends AbstractMenu {
         super(context, parent, FORMAT.getValue());
         FontStyleMenu.registerTo(context, this);
         FontSizeMenu.registerTo(context, this);
-        FontColorMenu.registerTo(context, this);
-        BackgroundColorMenu.registerTo(context, this);
+        AbstractMenuItem.builder()
+                .title(FONT_COLOR.getValue())
+                .context(context)
+                .parent(this)
+                .actionListener((e) -> {
+                    Color color = JColorChooser.showDialog(this, "Select a color", Color.BLACK);
+                    JTextArea textArea = Objects.requireNonNull(context.getJTextArea());
+                    textArea.setForeground(color);
+                })
+                .build();
+        AbstractMenuItem.builder()
+                .title(BACKGROUND_COLOR.getValue())
+                .context(context)
+                .parent(this)
+                .actionListener((e) -> {
+                    Color color = JColorChooser.showDialog(this, "Select a color", Color.BLACK);
+                    JTextArea textArea = Objects.requireNonNull(context.getJTextArea());
+                    textArea.setBackground(color);
+                })
+                .build();
     }
 
     @Override
