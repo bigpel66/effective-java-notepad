@@ -37,6 +37,10 @@ public final class Notepad extends JFrame implements ActionListener {
                 .title(this.config.getTitle())
                 .contents(this.config.getContents())
                 .hash(this.config.getHash())
+                .fontName(this.config.getFontName())
+                .fontSize(this.config.getFontSize())
+                .fontColor(this.config.getFontColor())
+                .backgroundColor(this.config.getBackgroundColor())
                 .isContentsSaved(this.config.isContentsSaved())
                 .isHelpOpened(false)
                 .build();

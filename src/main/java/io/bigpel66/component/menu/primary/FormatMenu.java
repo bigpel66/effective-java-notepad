@@ -33,6 +33,7 @@ public final class FormatMenu extends AbstractMenu {
                     Color color = JColorChooser.showDialog(this, "Select a color", Color.BLACK);
                     JTextArea textArea = Objects.requireNonNull(context.getJTextArea());
                     textArea.setForeground(color);
+                    context.getStateTracker().setFontColor(color);
                 })
                 .build();
         AbstractMenuItem.builder()
@@ -40,9 +41,10 @@ public final class FormatMenu extends AbstractMenu {
                 .context(context)
                 .parent(this)
                 .actionListener((e) -> {
-                    Color color = JColorChooser.showDialog(this, "Select a color", Color.BLACK);
+                    Color color = JColorChooser.showDialog(this, "Select a color", Color.WHITE);
                     JTextArea textArea = Objects.requireNonNull(context.getJTextArea());
                     textArea.setBackground(color);
+                    context.getStateTracker().setBackgroundColor(color);
                 })
                 .build();
     }

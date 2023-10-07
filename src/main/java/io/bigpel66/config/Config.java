@@ -14,6 +14,14 @@ public interface Config {
 
     int getHash();
 
+    String getFontName();
+
+    int getFontSize();
+
+    Color getFontColor();
+
+    Color getBackgroundColor();
+
     boolean isContentsSaved();
 
 }

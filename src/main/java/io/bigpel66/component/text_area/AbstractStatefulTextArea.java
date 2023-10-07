@@ -7,6 +7,7 @@ import io.bigpel66.utility.StateTracker;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.awt.*;
 import java.util.Objects;
 
 public class AbstractStatefulTextArea extends JTextArea implements Component {
@@ -19,6 +20,10 @@ public class AbstractStatefulTextArea extends JTextArea implements Component {
 
     protected AbstractStatefulTextArea(final Notepad context) {
         super(context.getStateTracker().getContents());
+        StateTracker state = context.getStateTracker();
+        setFont(new Font(state.getFontName(), Font.PLAIN, state.getFontSize()));
+        setForeground(state.getFontColor());
+        setBackground(state.getBackgroundColor());
         this.context = context;
         getDocument().addDocumentListener(new DocumentListener() {
 

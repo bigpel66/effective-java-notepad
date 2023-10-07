@@ -28,6 +28,7 @@ public final class FontSizeMenu extends AbstractMenu {
                     .actionListener((e) -> {
                         JTextArea textArea = Objects.requireNonNull(context.getJTextArea());
                         textArea.setFont(new Font(textArea.getFont().getName(), Font.PLAIN, copyIndex));
+                        context.getStateTracker().setFontSize(copyIndex);
                     })
                     .build();
         }

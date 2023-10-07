@@ -47,6 +47,10 @@ public final class ConfigLoader {
             sb.append(ConfigKey.TITLE.name()).append(" : ").append(tracker.getTitle()).append("\n");
             sb.append(ConfigKey.CONTENTS.name()).append(" : ").append(replaced).append("\n");
             sb.append(ConfigKey.HASH.name()).append(" : ").append(tracker.getHash()).append("\n");
+            sb.append(ConfigKey.FONT_NAME.name()).append(" : ").append(tracker.getFontName()).append("\n");
+            sb.append(ConfigKey.FONT_SIZE.name()).append(" : ").append(tracker.getFontSize()).append("\n");
+            sb.append(ConfigKey.FONT_COLOR.name()).append(" : ").append(tracker.getFontColor().getRGB()).append("\n");
+            sb.append(ConfigKey.BACKGROUND_COLOR.name()).append(" : ").append(tracker.getBackgroundColor().getRGB()).append("\n");
             sb.append(ConfigKey.IS_CONTENTS_SAVED.name()).append(" : ").append(tracker.isContentsSaved()).append("\n");
             bw.write(sb.toString());
         } catch (IOException e) {

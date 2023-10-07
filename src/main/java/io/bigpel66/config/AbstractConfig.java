@@ -4,8 +4,8 @@ import java.awt.*;
 import java.util.Map;
 import java.util.Objects;
 
-import static io.bigpel66.utility.DynamicTypeParser.toInt;
 import static io.bigpel66.config.ConfigKey.*;
+import static io.bigpel66.utility.DynamicTypeParser.toInt;
 
 public class AbstractConfig implements Config {
 
@@ -18,6 +18,14 @@ public class AbstractConfig implements Config {
     private final String contents;
 
     private final int hash;
+
+    private final String fontName;
+
+    private final int fontSize;
+
+    private final Color fontColor;
+
+    private final Color backgroundColor;
 
     private final boolean isContentsSaved;
 
@@ -32,7 +40,11 @@ public class AbstractConfig implements Config {
         title = configMap.getOrDefault(TITLE, TITLE.getValue()).toString();
         contents = configMap.getOrDefault(CONTENTS, CONTENTS.getValue()).toString();
         hash = toInt(configMap.getOrDefault(HASH, HASH.getValue()));
-        isContentsSaved = Boolean.parseBoolean((String) configMap.getOrDefault(IS_CONTENTS_SAVED, IS_CONTENTS_SAVED.getValue()));
+        fontName = configMap.getOrDefault(FONT_NAME, FONT_NAME.getValue()).toString();
+        fontSize = toInt(configMap.getOrDefault(FONT_SIZE, FONT_SIZE.getValue()));
+        fontColor = Color.getColor(null, toInt(configMap.getOrDefault(FONT_COLOR, FONT_COLOR.getValue())));
+        backgroundColor = Color.getColor(null, toInt(configMap.getOrDefault(BACKGROUND_COLOR, BACKGROUND_COLOR.getValue())));
+        isContentsSaved = Boolean.parseBoolean(configMap.getOrDefault(IS_CONTENTS_SAVED, IS_CONTENTS_SAVED.getValue()).toString());
     }
 
     @Override
@@ -58,6 +70,26 @@ public class AbstractConfig implements Config {
     @Override
     public int getHash() {
         return hash;
+    }
+
+    @Override
+    public String getFontName() {
+        return fontName;
+    }
+
+    @Override
+    public int getFontSize() {
+        return fontSize;
+    }
+
+    @Override
+    public Color getFontColor() {
+        return fontColor;
+    }
+
+    @Override
+    public Color getBackgroundColor() {
+        return backgroundColor;
     }
 
     @Override

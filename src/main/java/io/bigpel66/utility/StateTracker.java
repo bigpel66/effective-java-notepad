@@ -14,6 +14,14 @@ public final class StateTracker {
 
     private int hash;
 
+    private String fontName;
+
+    private int fontSize;
+
+    private Color fontColor;
+
+    private Color backgroundColor;
+
     private boolean isContentsSaved;
 
     private boolean isHelpOpened;
@@ -30,6 +38,10 @@ public final class StateTracker {
         hash = builder.hash;
         isContentsSaved = builder.isContentsSaved;
         isHelpOpened = builder.isHelpOpened;
+        fontName = builder.fontName;
+        fontSize = builder.fontSize;
+        fontColor = builder.fontColor;
+        backgroundColor = builder.backgroundColor;
     }
 
     public static class Builder {
@@ -43,6 +55,14 @@ public final class StateTracker {
         private String contents;
 
         private int hash;
+
+        private String fontName;
+
+        private int fontSize;
+
+        private Color fontColor;
+
+        private Color backgroundColor;
 
         private boolean isContentsSaved;
 
@@ -73,6 +93,26 @@ public final class StateTracker {
 
         public Builder hash(final int v) {
             hash = v;
+            return this;
+        }
+
+        public Builder fontName(final String v) {
+            fontName = v;
+            return this;
+        }
+
+        public Builder fontSize(final int v) {
+            fontSize = v;
+            return this;
+        }
+
+        public Builder fontColor(final Color v) {
+            fontColor = v;
+            return this;
+        }
+
+        public Builder backgroundColor(final Color v) {
+            backgroundColor = v;
             return this;
         }
 
@@ -112,6 +152,22 @@ public final class StateTracker {
         this.hash = hash;
     }
 
+    public void setFontName(String fontName) {
+        this.fontName = fontName;
+    }
+
+    public void setFontSize(int fontSize) {
+        this.fontSize = fontSize;
+    }
+
+    public void setFontColor(Color fontColor) {
+        this.fontColor = fontColor;
+    }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
     public void setContentsSaved(boolean contentsSaved) {
         isContentsSaved = contentsSaved;
     }
@@ -138,6 +194,22 @@ public final class StateTracker {
 
     public int getHash() {
         return hash;
+    }
+
+    public String getFontName() {
+        return fontName;
+    }
+
+    public int getFontSize() {
+        return fontSize;
+    }
+
+    public Color getFontColor() {
+        return fontColor;
+    }
+
+    public Color getBackgroundColor() {
+        return backgroundColor;
     }
 
     public boolean isContentsSaved() {
