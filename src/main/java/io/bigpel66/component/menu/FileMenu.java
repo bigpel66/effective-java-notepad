@@ -12,10 +12,10 @@ import java.io.*;
 import java.util.Objects;
 import java.util.Optional;
 
-public final class FileMenu extends AbstractMenu {
-    private static final String TITLE = "File";
+import static io.bigpel66.component.menu.MenuKey.FILE;
+import static io.bigpel66.component.menu_item.FileMenuItemKey.*;
 
-    private static final int INDEX = 0;
+public final class FileMenu extends AbstractMenu {
 
     private final ActionListener newConsumer = (e) -> Notepad.execute(ConfigLoader.load(true));
 
@@ -66,24 +66,24 @@ public final class FileMenu extends AbstractMenu {
     }
 
     private FileMenu(final Notepad context) {
-        super(context, TITLE);
+        super(context, FILE.getValue());
         AbstractMenuItem.builder()
-                .title("New")
-                .index(INDEX)
+                .title(NEW.getValue())
+                .index(FILE.ordinal())
                 .context(context)
                 .actionListener(newConsumer)
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.META_DOWN_MASK))
                 .build();
         AbstractMenuItem.builder()
-                .title("Open")
-                .index(INDEX)
+                .title(OPEN.getValue())
+                .index(FILE.ordinal())
                 .context(context)
                 .actionListener(openConsumer)
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.META_DOWN_MASK))
                 .build();
         AbstractMenuItem.builder()
-                .title("Save")
-                .index(INDEX)
+                .title(SAVE.getValue())
+                .index(FILE.ordinal())
                 .context(context)
                 .actionListener(saveConsumer)
                 .keyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.META_DOWN_MASK))
@@ -93,8 +93,8 @@ public final class FileMenu extends AbstractMenu {
     @Override
     public String toString() {
         return "Name : FileMenu\n" +
-                "Title : " + TITLE + "\n" +
-                "Index : " + INDEX;
+                "Title : " + FILE.getValue() + "\n" +
+                "Index : " + FILE.ordinal();
     }
 
 }

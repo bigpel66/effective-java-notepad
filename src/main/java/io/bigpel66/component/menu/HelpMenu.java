@@ -9,17 +9,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import static io.bigpel66.component.menu.MenuKey.HELP;
+import static io.bigpel66.component.menu_item.HelpMenuItemKey.*;
+
 public final class HelpMenu extends AbstractMenu {
-
-    private static final String TITLE = "Help";
-
-    private static final int INDEX = 3;
 
     private final ActionListener helpConsumer = (e) -> {
         if (getContext().getStateTracker().isHelpOpened()) {
             return;
         }
-        JDialog dialog = new JDialog(getContext(), TITLE, false);
+        JDialog dialog = new JDialog(getContext(), HELP.getValue(), false);
         Point location = getContext().getStateTracker().getLocation();
         Dimension size = getContext().getStateTracker().getSize();
         int dialogWidth = 250;
@@ -46,10 +45,10 @@ public final class HelpMenu extends AbstractMenu {
     }
 
     private HelpMenu(final Notepad context) {
-        super(context, TITLE);
+        super(context, HELP.getValue());
         AbstractMenuItem.builder()
-                .title("About")
-                .index(INDEX)
+                .title(ABOUT.getValue())
+                .index(HELP.ordinal())
                 .context(context)
                 .actionListener(helpConsumer)
                 .build();
@@ -58,8 +57,8 @@ public final class HelpMenu extends AbstractMenu {
     @Override
     public String toString() {
         return "Name : HelpMenu\n" +
-                "Title : " + TITLE + "\n" +
-                "Index : " + INDEX;
+                "Title : " + HELP.getValue() + "\n" +
+                "Index : " + HELP.ordinal();
     }
 
 }
