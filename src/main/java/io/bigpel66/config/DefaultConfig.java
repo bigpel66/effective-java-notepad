@@ -1,7 +1,6 @@
 package io.bigpel66.config;
 
 import java.awt.*;
-import java.util.Optional;
 
 import static io.bigpel66.config.ConfigKey.*;
 

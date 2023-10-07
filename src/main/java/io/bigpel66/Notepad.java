@@ -1,6 +1,5 @@
 package io.bigpel66;
 
-
 import com.apple.eawt.Application;
 import io.bigpel66.component.layout.AbstractScrollableLayout;
 import io.bigpel66.component.menu_bar.PrimaryMenuBar;
